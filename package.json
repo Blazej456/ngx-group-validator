@@ -1,6 +1,10 @@
 {
-  "name": "ngx-form-group-validator",
-  "version": "0.0.0",
+  "name": "form-group-validator-library",
+  "version": "0.1.0",
+  "author": {
+    "email": "blaze456@gmail.com",
+    "name": "Blazej Szymanski"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
