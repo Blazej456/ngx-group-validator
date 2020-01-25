@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-form-group-validator": [
+        "dist/ngx-form-group-validator"
+      ],
+      "ngx-form-group-validator/*": [
+        "dist/ngx-form-group-validator/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
