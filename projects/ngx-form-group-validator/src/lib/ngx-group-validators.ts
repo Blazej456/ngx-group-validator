@@ -1,11 +1,11 @@
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
-type ConditionFn = (control: AbstractControl) => boolean;
+type ConditionFn = (..._: AbstractControl[]) => boolean
 interface GroupConfig {
   [path: string]: {
     condition: {
       paths: string[];
-      check: (..._: AbstractControl[]) => boolean
+      check: ConditionFn
     },
     validators: ValidatorFn | ValidatorFn[]
   };
