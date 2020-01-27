@@ -1,6 +1,7 @@
-import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
-type ConditionFn = (..._: AbstractControl[]) => boolean
+type ConditionFn = (..._: AbstractControl[]) => boolean;
+
 interface GroupConfig {
   [path: string]: {
     condition: {
@@ -13,8 +14,69 @@ interface GroupConfig {
 
 export class NgxGroupValidators {
   static sync(config: GroupConfig): ValidatorFn {
-    return;
+    return (formGroup: FormGroup) => {
+      return Object
+        .entries(config)
+        .map(([path, data]) => {
+          if (!controlIsValidable(formGroup.get(path))) {
+            return null;
+          }
+
+          if (data.condition.paths.length === 0) {
+            return null;
+          }
+
+          if (!pathsIsCorrect(data.condition.paths, formGroup)) {
+            return null;
+          }
+
+          const doValidate = data.condition.check(...data.condition.paths.map(c => formGroup.get(c)));
+          if (doValidate) {
+            if (!data.validators) {
+              return null;
+            }
+
+            const validators = Array.isArray(data.validators) ? data.validators : [data.validators];
+            const presentValidators: ValidatorFn[] = validators.filter(isPresent) as any;
+            if (presentValidators.length === 0) {
+              return null;
+            }
+
+            return _mergeErrors(_executeValidators(formGroup.get(path), presentValidators));
+          }
+          return null;
+        })
+        .filter(a => a != null);
+    };
   }
+}
+
+function pathsIsCorrect(paths: string[], formGroup: FormGroup): boolean {
+  return paths.every(path => formGroup.get(path) != null);
+}
+
+function controlIsValidable(control: AbstractControl): boolean {
+  return control != null && !control.disabled;
+}
+
+
+/**
+ * All functions above are copy from Angular
+ */
+function isPresent(o: any): boolean {
+  return o != null;
+}
+
+function _executeValidators(control: AbstractControl, validators: ValidatorFn[]): any[] {
+  return validators.map(v => v(control));
+}
+
+function _mergeErrors(arrayOfErrors: ValidationErrors[]): ValidationErrors | null {
+  const res: { [key: string]: any } =
+    arrayOfErrors.reduce((res: ValidationErrors | null, errors: ValidationErrors | null) => {
+      return errors != null ? {...res !, ...errors} : res !;
+    }, {});
+  return Object.keys(res).length === 0 ? null : res;
 }
 
 // example of use:
