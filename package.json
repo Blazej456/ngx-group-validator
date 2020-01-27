@@ -7,8 +7,9 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve ngx-form-group-validator-demo --port 8080",
+    "build": "ng build ngx-form-group-validator",
+    "develop": "yarn build --watch",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
