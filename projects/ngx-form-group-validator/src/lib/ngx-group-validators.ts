@@ -48,7 +48,7 @@ export class NgxGroupValidators {
         })
         .filter(a => a != null);
 
-      return errors;
+      return _mergeErrors(errors);
     };
   }
 }
