@@ -42,13 +42,13 @@ export class NgxGroupValidators {
               return null;
             }
 
-            return _mergeErrors(_executeValidators(formGroup.get(path), presentValidators));
+            return {[path]: _mergeErrors(_executeValidators(formGroup.get(path), presentValidators))};
           }
           return null;
         })
         .filter(a => a != null);
 
-      return _mergeErrors(errors);
+      return errors;
     };
   }
 }
@@ -80,19 +80,3 @@ function _mergeErrors(arrayOfErrors: ValidationErrors[]): ValidationErrors | nul
     }, {});
   return Object.keys(res).length === 0 ? null : res;
 }
-
-// example of use:
-// const test: FormGroup = new FormGroup({
-//     field1: new FormControl(''),
-//     field2: new FormControl(''),
-//     field3: new FormControl('')
-//   },
-//   NgxGroupValidators.sync({
-//     field1: {
-//       condition: {
-//         paths: ['field2', 'field3'],
-//         check: (f2, f3) => f2.value === true && f3.value === true
-//       },
-//       validators: [Validators.required]
-//     }
-//   }));
