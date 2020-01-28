@@ -1,8 +1,8 @@
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-type ConditionFn = (..._: AbstractControl[]) => boolean;
+export type ConditionFn = (...controls: AbstractControl[]) => boolean;
 
-interface GroupConfig {
+export interface GroupConfig {
   [path: string]: {
     condition: {
       paths: string[];
@@ -14,8 +14,8 @@ interface GroupConfig {
 
 export class NgxGroupValidators {
   static sync(config: GroupConfig): ValidatorFn {
-    return (formGroup: FormGroup) => {
-      return Object
+    return (formGroup: FormGroup): ValidationErrors | null => {
+      const errors = Object
         .entries(config)
         .map(([path, data]) => {
           if (!controlIsValidable(formGroup.get(path))) {
@@ -47,6 +47,8 @@ export class NgxGroupValidators {
           return null;
         })
         .filter(a => a != null);
+
+      return _mergeErrors(errors);
     };
   }
 }
@@ -80,17 +82,17 @@ function _mergeErrors(arrayOfErrors: ValidationErrors[]): ValidationErrors | nul
 }
 
 // example of use:
-const test: FormGroup = new FormGroup({
-    field1: new FormControl(''),
-    field2: new FormControl(''),
-    field3: new FormControl('')
-  },
-  NgxGroupValidators.sync({
-    field1: {
-      condition: {
-        paths: ['field2', 'field3'],
-        check: (f2, f3) => f2.value === true && f3.value === true
-      },
-      validators: [Validators.required]
-    }
-  }));
+// const test: FormGroup = new FormGroup({
+//     field1: new FormControl(''),
+//     field2: new FormControl(''),
+//     field3: new FormControl('')
+//   },
+//   NgxGroupValidators.sync({
+//     field1: {
+//       condition: {
+//         paths: ['field2', 'field3'],
+//         check: (f2, f3) => f2.value === true && f3.value === true
+//       },
+//       validators: [Validators.required]
+//     }
+//   }));
