@@ -42,7 +42,8 @@ export class NgxGroupValidators {
               return null;
             }
 
-            return {[path]: _mergeErrors(_executeValidators(formGroup.get(path), presentValidators))};
+            const err = _mergeErrors(_executeValidators(formGroup.get(path), presentValidators));
+            return err ? {[path]: err} : null;
           }
           return null;
         })
