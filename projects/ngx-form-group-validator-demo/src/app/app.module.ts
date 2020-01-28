@@ -14,6 +14,16 @@ import {
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HIGHLIGHT_OPTIONS, HighlightModule, HighlightOptions } from 'ngx-highlightjs';
+
+export function getHighlightLanguages() {
+  return {
+    typescript: () => import('highlight.js/lib/languages/typescript'),
+    css: () => import('highlight.js/lib/languages/css'),
+    json: () => import('highlight.js/lib/languages/json.js'),
+    javascript: () => import('highlight.js/lib/languages/javascript.js')
+  };
+}
 
 @NgModule({
   declarations: [
@@ -24,6 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     BrowserModule,
+    HighlightModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
@@ -32,7 +43,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatFormFieldModule,
     MatInputModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {
+        languages: getHighlightLanguages(),
+        lineNumbers: true
+      } as HighlightOptions
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

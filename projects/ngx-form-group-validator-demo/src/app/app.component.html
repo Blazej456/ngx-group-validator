@@ -7,7 +7,8 @@
 <div class="container">
   <mat-card class="example-card">
     <mat-card-header>
-      <mat-card-title>Form</mat-card-title>
+      <mat-card-title>Example 1</mat-card-title>
+      <mat-card-subtitle>Comment input is required only if both checkbox are checked</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <form [formGroup]="form" class="example-form">
@@ -19,10 +20,11 @@
             Comment is <strong>required</strong>
           </mat-error>
         </mat-form-field>
+
       </form>
     </mat-card-content>
     <mat-card-footer>
-      <pre>{{form.errors | json}}</pre>
+      <pre><code [highlight]="form.errors | json" [lineNumbers]="true"></code></pre>
     </mat-card-footer>
   </mat-card>
 </div>

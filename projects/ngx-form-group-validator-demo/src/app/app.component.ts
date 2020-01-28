@@ -9,7 +9,7 @@ import { ErrorStateMatcher } from '@angular/material';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'NgxGroupValidator';
+  title = 'ngx-group-validator';
   form: FormGroup;
   matcher: ErrorStateMatcher = {
     isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
