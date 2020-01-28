@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { NgxGroupValidators } from 'ngx-form-group-validator';
-import { MyErrorStateMatcher } from './my-error-state-matcher';
+import { ErrorStateMatcher } from '@angular/material';
 
 @Component({
   selector: 'fgv-demo-root',
@@ -11,7 +11,11 @@ import { MyErrorStateMatcher } from './my-error-state-matcher';
 export class AppComponent {
   title = 'NgxGroupValidator';
   form: FormGroup;
-  matcher = new MyErrorStateMatcher();
+  matcher: ErrorStateMatcher = {
+    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+      return !!(form.invalid && form.errors.comment && form.errors.comment.required === true);
+    }
+  };
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
