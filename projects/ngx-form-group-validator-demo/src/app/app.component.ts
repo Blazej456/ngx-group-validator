@@ -16,6 +16,7 @@ export class AppComponent {
       return !!(form.invalid && form.errors.comment && form.errors.comment.required === true);
     }
   };
+  gist: any;
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({

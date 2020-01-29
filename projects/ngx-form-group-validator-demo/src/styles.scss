@@ -26,3 +26,35 @@ body {
   display: block;
   margin-block-start: 0.5rem;
 }
+
+.flex {
+  display: flex;
+  flex-wrap: nowrap;
+
+  &.vertical {
+    flex-direction: column;
+
+    > *:not(:last-of-type) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  > * {
+    flex-grow: 1;
+    padding: 0 .5rem;
+  }
+
+}
+
+.ng-scrollbar {
+  flex: 1;
+  --scrollbar-thumb-color: orange;
+  --scrollbar-track-color: rgba(0, 0, 0, 0.2);
+  --scrollbar-size: 7px;
+  --scrollbar-padding: 5px;
+  --scrollbar-hover-size: 10px;
+}
+
+.divider {
+  padding: 1rem 0;
+}

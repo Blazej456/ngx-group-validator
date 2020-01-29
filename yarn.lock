@@ -913,6 +913,11 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.2.tgz#26520bf09abe4a5644cd5414e37125a8954241dd"
   integrity sha512-tsAQNx32a8CoFhjhijUIhI4kccIAgmGhy8LZMZgGfmXcpMbPRUqn5LWmgRttILi6yeGmBJd2xsPkFMs0PzgPCw==
 
+"@juggle/resize-observer@*":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@juggle/resize-observer/-/resize-observer-3.0.2.tgz#f4f326806826c0da5221411374e4c54902c327bb"
+  integrity sha512-9fEfZIxZ1qTahMSX50pigfSJ/1N6X2oABhmgd4Dt2SsPkZi0lTlvoHu5V2yrGZ6m+oALfS4tJrpx9nbVIxwOYQ==
+
 "@ngtools/webpack@8.3.23":
   version "8.3.23"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-8.3.23.tgz#2961d48d1860e93c7afcb6ec91040a753f6463a8"
@@ -1650,6 +1655,11 @@ better-assert@~1.0.0:
   integrity sha1-QIZrnhueC1W0gYlDEeaPr/rrxSI=
   dependencies:
     callsite "1.0.0"
+
+bezier-easing@*:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/bezier-easing/-/bezier-easing-2.1.0.tgz#c04dfe8b926d6ecaca1813d69ff179b7c2025d86"
+  integrity sha1-wE3+i5JtbsrKGBPWn/F5t8ICXYY=
 
 big.js@^5.2.2:
   version "5.2.2"
@@ -5434,6 +5444,15 @@ ngx-highlightjs@^4.0.2:
   dependencies:
     highlight.js "*"
     highlightjs-line-numbers.js "*"
+    tslib "^1.9.0"
+
+ngx-scrollbar@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/ngx-scrollbar/-/ngx-scrollbar-7.1.0.tgz#702d2c4d17a8248631e59b3ceb6d3f56dab7f291"
+  integrity sha512-yA5XDyXSyxNVs+5RmyaFULkQLNN0mTIDVjBIWJEkxvCTVUhOuejR8PCXZj2CvudwiirM7Uxqla+Dqgn+Itvg9Q==
+  dependencies:
+    "@juggle/resize-observer" "*"
+    bezier-easing "*"
     tslib "^1.9.0"
 
 nice-try@^1.0.4:

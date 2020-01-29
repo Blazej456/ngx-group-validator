@@ -11,20 +11,55 @@
       <mat-card-subtitle>Comment input is required only if both checkbox are checked</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <form [formGroup]="form" class="example-form">
-        <mat-checkbox formControlName="checkbox1" class="example-checkbox">Checkbox 1</mat-checkbox>
-        <mat-checkbox formControlName="checkbox2" class="example-checkbox">Checkbox 2</mat-checkbox>
-        <mat-form-field class="example-full-width">
-          <input formControlName="comment" matInput placeholder="Leave a comment" [errorStateMatcher]="matcher">
-          <mat-error *ngIf="form.hasError('comment')">
-            Comment is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
+      <div class="flex">
+        <form [formGroup]="form">
+          <mat-checkbox class="example-checkbox" formControlName="checkbox1">Checkbox 1</mat-checkbox>
+          <mat-checkbox class="example-checkbox" formControlName="checkbox2">Checkbox 2</mat-checkbox>
+          <mat-form-field class="example-full-width">
+            <input [errorStateMatcher]="matcher" formControlName="comment" matInput placeholder="Leave a comment">
+            <mat-error *ngIf="form.hasError('comment')">
+              Comment is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
 
-      </form>
+        </form>
+        <div class="flex vertical">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title><code>form.errors</code></mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <pre><code [highlight]="form.errors | json"></code></pre>
+            </mat-card-content>
+
+          </mat-card>
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title><code>form.get('comment').errors</code></mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <pre><code [highlight]="form.get('comment').errors | json"></code></pre>
+            </mat-card-content>
+
+          </mat-card>
+        </div>
+      </div>
+
+      <div class="divider">
+        <mat-divider></mat-divider>
+      </div>
+
+      <div (gistLoad)="gist = $event" class="hljs" gist="d49e4fa14e024946a6a2a7c17b80d6f8">
+        <mat-tab-group dynamicHeight>
+          <mat-tab *ngFor="let file of gist?.files | keyvalue" [label]="file.value.filename">
+            <pre>
+              <code [highlight]="gist | gistFile: file.key"></code>
+            </pre>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+
+
     </mat-card-content>
-    <mat-card-footer>
-      <pre><code [highlight]="form.errors | json" [lineNumbers]="true"></code></pre>
-    </mat-card-footer>
   </mat-card>
 </div>
