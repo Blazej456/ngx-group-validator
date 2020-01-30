@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { NgxGroupValidators } from 'ngx-form-group-validator';
 import { ErrorStateMatcher } from '@angular/material';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'fgv-demo-root',
@@ -17,7 +18,7 @@ export class AppComponent {
     }
   };
   gist: any;
-
+  github = faGithub;
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       checkbox1: [true],

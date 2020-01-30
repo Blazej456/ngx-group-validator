@@ -65,7 +65,8 @@
             "styles": [
               "projects/ngx-form-group-validator-demo/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+            ]
           },
           "configurations": {
             "production": {

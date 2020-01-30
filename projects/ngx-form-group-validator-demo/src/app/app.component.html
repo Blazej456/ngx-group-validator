@@ -5,7 +5,7 @@
 </mat-toolbar>
 
 <div class="container">
-  <mat-card class="example-card">
+  <mat-card class="example-card mat-elevation-z5">
     <mat-card-header>
       <mat-card-title>Example 1</mat-card-title>
       <mat-card-subtitle>Comment input is required only if both checkbox are checked</mat-card-subtitle>
@@ -61,5 +61,12 @@
 
 
     </mat-card-content>
+    <mat-card-footer>
+      <a [href]="gist?.html_url" class="gist-url" target="_blank">
+        <span class="git-icon">Open gist on Github</span>
+        <fa-icon [icon]="github" class="fa-2x"></fa-icon>
+      </a>
+    </mat-card-footer>
+
   </mat-card>
 </div>

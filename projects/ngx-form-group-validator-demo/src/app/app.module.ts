@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HIGHLIGHT_OPTIONS, HighlightModule, HighlightOptions } from 'ngx-highlightjs';
 import { HighlightPlusModule } from 'ngx-highlightjs/plus';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export function getHighlightLanguages() {
   return {
@@ -50,7 +51,8 @@ export function getHighlightLanguages() {
     MatInputModule,
     MatTabsModule,
     NgScrollbarModule,
-    MatDividerModule
+    MatDividerModule,
+    FontAwesomeModule
   ],
   providers: [
     {

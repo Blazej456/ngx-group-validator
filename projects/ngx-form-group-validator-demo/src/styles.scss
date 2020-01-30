@@ -58,3 +58,23 @@ body {
 .divider {
   padding: 1rem 0;
 }
+
+.mat-card-footer {
+  padding: 10px !important;
+  margin: 0 !important;
+  display: flex;
+  flex-direction: row-reverse;
+
+  .gist-url {
+    display: flex;
+    align-items: center;
+    font-weight: 300;
+    font-size: 13px;
+    color: white;
+    text-decoration: unset;
+  }
+}
+
+.git-icon {
+  margin-right: .5rem;
+}
