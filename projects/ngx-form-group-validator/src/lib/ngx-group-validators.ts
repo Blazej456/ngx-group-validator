@@ -1,51 +1,44 @@
 import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
-
-export type ConditionFn = (...controls: AbstractControl[]) => boolean;
-
-export interface GroupConfig {
-  [path: string]: {
-    condition: {
-      paths: string[];
-      check: ConditionFn
-    },
-    validators: ValidatorFn | ValidatorFn[]
-  };
-}
+import { SingleControlCondition, ValidationRules } from './ngx-group-validators.model';
 
 export class NgxGroupValidators {
-  static sync(config: GroupConfig): ValidatorFn {
+  static sync(config: ValidationRules): ValidatorFn {
     return (formGroup: FormGroup): ValidationErrors | null => {
       const errors = Object
         .entries(config)
-        .map(([path, data]) => {
+        .map(([path, conditions]) => {
           if (!controlIsValidable(formGroup.get(path))) {
             return null;
           }
 
-          if (data.condition.paths.length === 0) {
-            return null;
-          }
-
-          if (!pathsIsCorrect(data.condition.paths, formGroup)) {
-            return null;
-          }
-
-          const doValidate = data.condition.check(...data.condition.paths.map(c => formGroup.get(c)));
-          if (doValidate) {
-            if (!data.validators) {
+          const allErrors = Object.values(conditions).map((data: SingleControlCondition) => {
+            if (data.condition.paths.length === 0) {
               return null;
             }
 
-            const validators = Array.isArray(data.validators) ? data.validators : [data.validators];
-            const presentValidators: ValidatorFn[] = validators.filter(isPresent) as any;
-            if (presentValidators.length === 0) {
+            if (!pathsIsCorrect(data.condition.paths, formGroup)) {
               return null;
             }
 
-            const err = _mergeErrors(_executeValidators(formGroup.get(path), presentValidators));
+            const doValidate = data.condition.check(...data.condition.paths.map(c => formGroup.get(c)));
+            let err = null;
+            if (doValidate) {
+              if (!data.validators) {
+                return null;
+              }
+
+              const validators = Array.isArray(data.validators) ? data.validators : [data.validators];
+              const presentValidators: ValidatorFn[] = validators.filter(isPresent) as any;
+              if (presentValidators.length === 0) {
+                return null;
+              }
+
+              err = _mergeErrors(_executeValidators(formGroup.get(path), presentValidators));
+
+            }
             return err ? {[path]: err} : null;
-          }
-          return null;
+          });
+          return _mergeErrors(allErrors);
         })
         .filter(a => a != null);
 
