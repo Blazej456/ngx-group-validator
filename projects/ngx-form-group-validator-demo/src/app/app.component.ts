@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { NgxGroupValidators } from 'ngx-form-group-validator';
+import { NgxGroupValidators, NgxValidatorsHelpers } from 'ngx-form-group-validator';
 
 @Component({
   selector: 'fgv-demo-root',
@@ -19,6 +19,8 @@ export class AppComponent {
   };
   gist: any;
   github = faGithub;
+
+  seekForErrors = (name) => NgxValidatorsHelpers.errors(this.form.get(name), name);
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
