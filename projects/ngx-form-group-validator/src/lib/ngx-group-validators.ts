@@ -1,5 +1,6 @@
 import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { SingleControlCondition, ValidationRules } from './ngx-group-validators.model';
+import { AsyncValidationRules, SingleControlCondition, ValidationRules } from './ngx-group-validators.model';
+import { Observable, of } from 'rxjs';
 
 export class NgxGroupValidators {
   static sync(config: ValidationRules): ValidatorFn {
@@ -11,7 +12,7 @@ export class NgxGroupValidators {
             return null;
           }
 
-          const allErrors = Object.values(conditions).map((data: SingleControlCondition) => {
+          const allErrors = Object.values(conditions).map((data: SingleControlCondition<ValidatorFn>) => {
             if (data.condition.paths.length === 0) {
               return null;
             }
@@ -44,6 +45,10 @@ export class NgxGroupValidators {
 
       return _mergeErrors(errors);
     };
+  }
+
+  static async(config: AsyncValidationRules): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
+    return of(null);
   }
 }
 
