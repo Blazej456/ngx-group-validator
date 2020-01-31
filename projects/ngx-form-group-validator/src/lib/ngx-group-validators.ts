@@ -62,7 +62,7 @@ function controlIsValidable(control: AbstractControl): boolean {
 
 
 /**
- * All functions above are copy from Angular
+ * All functions above are copy from @Angular/forms
  */
 function isPresent(o: any): boolean {
   return o != null;

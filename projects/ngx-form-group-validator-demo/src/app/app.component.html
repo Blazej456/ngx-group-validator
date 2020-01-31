@@ -69,16 +69,14 @@
             </pre>
           </mat-tab>
         </mat-tab-group>
+        <mat-divider [inset]="true"></mat-divider>
+        <a [href]="gist?.html_url" class="gist-url" target="_blank">
+          <span class="git-icon">Open gist on Github</span>
+          <fa-icon [icon]="github" class="fa-2x"></fa-icon>
+        </a>
       </div>
 
 
     </mat-card-content>
-    <mat-card-footer>
-      <a [href]="gist?.html_url" class="gist-url" target="_blank">
-        <span class="git-icon">Open gist on Github</span>
-        <fa-icon [icon]="github" class="fa-2x"></fa-icon>
-      </a>
-    </mat-card-footer>
-
   </mat-card>
 </div>
