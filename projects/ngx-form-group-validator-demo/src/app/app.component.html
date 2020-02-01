@@ -15,11 +15,18 @@
         <form [formGroup]="form" class="w-50">
           <mat-checkbox class="example-checkbox" formControlName="checkbox1">Checkbox 1</mat-checkbox>
           <mat-checkbox class="example-checkbox" formControlName="checkbox2">Checkbox 2</mat-checkbox>
-          <mat-form-field class="example-full-width">
+          <mat-form-field appearance="legacy" class="example-full-width">
+            <mat-label>Comment</mat-label>
             <input [errorStateMatcher]="matcher" formControlName="comment" matInput placeholder="Leave a comment">
             <mat-error *ngIf="form.hasError('comment')">
               Comment is <strong>required</strong>
             </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy" class="example-full-width">
+            <mat-label>Long text</mat-label>
+            <input formControlName="long" matInput placeholder="Type something">
+            <mat-hint>the 'comment' field can't be longer than me</mat-hint>
           </mat-form-field>
 
         </form>
@@ -33,6 +40,7 @@
             </mat-card-content>
 
           </mat-card>
+
           <mat-card>
             <mat-card-header>
               <mat-card-title><code>form.get('comment').errors</code></mat-card-title>
@@ -40,19 +48,6 @@
             <mat-card-content>
               <pre><code [highlight]="form.get('comment').errors | json"></code></pre>
             </mat-card-content>
-
-          </mat-card>
-
-          <mat-card>
-            <mat-card-header>
-              <mat-card-title><code>NgxValidatorsHelpers.errors(...)</code></mat-card-title>
-              <mat-card-subtitle>This helper collect all errors for this control from itself down thru root
-              </mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-              <pre><code [highlight]="seekForErrors('comment') | json"></code></pre>
-            </mat-card-content>
-
           </mat-card>
         </div>
       </div>
