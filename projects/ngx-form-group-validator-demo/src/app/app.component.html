@@ -23,12 +23,12 @@
               Comment is <strong>required</strong>
             </mat-error>
             <mat-error *ngIf="hasError('commentToLong')">
-              Comment is <b>longer</b> than 'Not longer' field
+              Comment is <b>longer</b> than 'No longer' field
             </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="legacy" class="example-full-width">
-            <mat-label>Not longer</mat-label>
+            <mat-label>No longer</mat-label>
             <input formControlName="long" matInput placeholder="Type something">
             <mat-hint>the 'comment' field can't be longer than me >but only if 'longEnable' checkbox is checked
             </mat-hint>
