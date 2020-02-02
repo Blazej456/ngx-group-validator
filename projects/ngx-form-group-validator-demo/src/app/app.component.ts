@@ -14,7 +14,7 @@ export class AppComponent {
   form: FormGroup;
   matcher: ErrorStateMatcher = {
     isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-      return !!(form.invalid && form.errors && form.errors.comment && form.errors.comment.required === true);
+      return !!(form.invalid && form.errors && form.errors.comment);
     }
   };
   gist: any;
@@ -24,7 +24,9 @@ export class AppComponent {
     this.form = this.fb.group({
       checkbox1: [true],
       checkbox2: [false],
-      comment: ['']
+      comment: [''],
+      long: [''],
+      longEnable: [false]
     }, {
       validators: NgxGroupValidators.sync({
         comment: [
@@ -34,9 +36,25 @@ export class AppComponent {
               check: (a, b) => a.value === true && b.value === true
             },
             validators: Validators.required
+          },
+          {
+            condition: {
+              paths: ['comment', 'long', 'longEnable'],
+              check: (a, b, c) => {
+                if (b.value.length > 0 && c.value) {
+                  return a.value.length > b.value.length;
+                }
+                return false;
+              }
+            },
+            validators: c => ({commentToLong: true})
           }
         ]
       })
     });
+  }
+
+  hasError(error: string) {
+    return this.form.errors && 'comment' in this.form.errors && error in this.form.errors.comment;
   }
 }

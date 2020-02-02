@@ -13,20 +13,25 @@
     <mat-card-content>
       <div class="flex">
         <form [formGroup]="form" class="w-50">
-          <mat-checkbox class="example-checkbox" formControlName="checkbox1">Checkbox 1</mat-checkbox>
-          <mat-checkbox class="example-checkbox" formControlName="checkbox2">Checkbox 2</mat-checkbox>
+          <mat-checkbox class="example-checkbox" formControlName="checkbox1">checkbox1</mat-checkbox>
+          <mat-checkbox class="example-checkbox" formControlName="checkbox2">checkbox2</mat-checkbox>
+          <mat-checkbox class="example-checkbox" formControlName="longEnable">longEnable</mat-checkbox>
           <mat-form-field appearance="legacy" class="example-full-width">
-            <mat-label>Comment</mat-label>
+            <mat-label>comment</mat-label>
             <input [errorStateMatcher]="matcher" formControlName="comment" matInput placeholder="Leave a comment">
-            <mat-error *ngIf="form.hasError('comment')">
+            <mat-error *ngIf="hasError('required')">
               Comment is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="hasError('commentToLong')">
+              Comment is <b>longer</b> than 'Not longer' field
             </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="legacy" class="example-full-width">
-            <mat-label>Long text</mat-label>
+            <mat-label>Not longer</mat-label>
             <input formControlName="long" matInput placeholder="Type something">
-            <mat-hint>the 'comment' field can't be longer than me</mat-hint>
+            <mat-hint>the 'comment' field can't be longer than me >but only if 'longEnable' checkbox is checked
+            </mat-hint>
           </mat-form-field>
 
         </form>
