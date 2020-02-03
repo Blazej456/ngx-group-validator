@@ -30,13 +30,13 @@
           <mat-form-field appearance="legacy" class="example-full-width">
             <mat-label>No longer</mat-label>
             <input formControlName="long" matInput placeholder="Type something">
-            <mat-hint>the 'comment' field can't be longer than me >but only if 'longEnable' checkbox is checked
+            <mat-hint>the 'comment' field can't be longer than me but only if 'longEnable' checkbox is checked
             </mat-hint>
           </mat-form-field>
 
         </form>
         <div class="flex vertical w-50">
-          <mat-card>
+          <mat-card class="mat-elevation-z3">
             <mat-card-header>
               <mat-card-title><code>form.errors</code></mat-card-title>
             </mat-card-header>
@@ -46,7 +46,7 @@
 
           </mat-card>
 
-          <mat-card>
+          <mat-card *ngIf="false">
             <mat-card-header>
               <mat-card-title><code>form.get('comment').errors</code></mat-card-title>
             </mat-card-header>
@@ -58,7 +58,7 @@
       </div>
 
       <div class="divider">
-        <mat-divider></mat-divider>
+        <mat-divider [inset]="true"></mat-divider>
       </div>
 
       <div (gistLoad)="gist = $event" class="hljs" gist="d49e4fa14e024946a6a2a7c17b80d6f8">
