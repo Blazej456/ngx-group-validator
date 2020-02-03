@@ -10,7 +10,8 @@
     "start": "ng serve ngx-form-group-validator-demo --port 8080",
     "build": "ng build ngx-form-group-validator",
     "develop": "yarn build --watch",
-    "test": "ng test",
+    "test": "ng test ngx-form-group-validator --watch=false --browsers=ChromeHeadlessCustom",
+    "test:watch": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -56,6 +57,7 @@
     "karma-jasmine-html-reporter": "^1.4.0",
     "ng-packagr": "^5.4.0",
     "protractor": "~5.4.0",
+    "puppeteer": "^2.1.0",
     "ts-node": "~7.0.0",
     "tsickle": "^0.37.0",
     "tslint": "~5.15.0",
