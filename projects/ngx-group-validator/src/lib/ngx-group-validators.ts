@@ -1,6 +1,7 @@
-import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { AsyncValidationRules, SingleControlCondition, ValidationRules } from './ngx-group-validators.model';
-import { Observable, of } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export class NgxGroupValidators {
   static sync(config: ValidationRules): ValidatorFn {
@@ -21,21 +22,13 @@ export class NgxGroupValidators {
               return null;
             }
 
-            const doValidate = data.condition.check(...data.condition.paths.map(c => formGroup.get(c)));
             let err = null;
-            if (doValidate) {
+            if (data.condition.check(...data.condition.paths.map(c => formGroup.get(c)))) {
               if (!data.validators) {
                 return null;
               }
-
               const validators = Array.isArray(data.validators) ? data.validators : [data.validators];
-              const presentValidators: ValidatorFn[] = validators.filter(isPresent) as any;
-              if (presentValidators.length === 0) {
-                return null;
-              }
-
-              err = _mergeErrors(_executeValidators(formGroup.get(path), presentValidators));
-
+              err = Validators.compose(validators)(formGroup.get(path));
             }
             return err ? {[path]: err} : null;
           });
@@ -62,16 +55,8 @@ function controlIsValidable(control: AbstractControl): boolean {
 
 
 /**
- * All functions above are copy from @Angular/forms
+ * This function is raw copy from @Angular/forms
  */
-function isPresent(o: any): boolean {
-  return o != null;
-}
-
-function _executeValidators(control: AbstractControl, validators: ValidatorFn[]): any[] {
-  return validators.map(v => v(control));
-}
-
 function _mergeErrors(arrayOfErrors: ValidationErrors[]): ValidationErrors | null {
   const res: { [key: string]: any } =
     arrayOfErrors.reduce((res: ValidationErrors | null, errors: ValidationErrors | null) => {
