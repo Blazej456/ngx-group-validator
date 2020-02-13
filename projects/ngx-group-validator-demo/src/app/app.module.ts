@@ -21,6 +21,7 @@ import { HighlightPlusModule } from 'ngx-highlightjs/plus';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SyncComponent } from './sync/sync.component';
+import { AsyncComponent } from './async/async.component';
 
 export function getHighlightLanguages() {
   return {
@@ -35,7 +36,8 @@ export function getHighlightLanguages() {
 @NgModule({
   declarations: [
     AppComponent,
-    SyncComponent
+    SyncComponent,
+    AsyncComponent
   ],
   imports: [
     CommonModule,
