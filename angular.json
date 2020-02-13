@@ -3,33 +3,33 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-form-group-validator": {
+    "ngx-group-validator": {
       "projectType": "library",
-      "root": "projects/ngx-form-group-validator",
-      "sourceRoot": "projects/ngx-form-group-validator/src",
+      "root": "projects/ngx-group-validator",
+      "sourceRoot": "projects/ngx-group-validator/src",
       "prefix": "fg-val",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/ngx-form-group-validator/tsconfig.lib.json",
-            "project": "projects/ngx-form-group-validator/ng-package.json"
+            "tsConfig": "projects/ngx-group-validator/tsconfig.lib.json",
+            "project": "projects/ngx-group-validator/ng-package.json"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ngx-form-group-validator/src/test.ts",
-            "tsConfig": "projects/ngx-form-group-validator/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-form-group-validator/karma.conf.js"
+            "main": "projects/ngx-group-validator/src/test.ts",
+            "tsConfig": "projects/ngx-group-validator/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-group-validator/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/ngx-form-group-validator/tsconfig.lib.json",
-              "projects/ngx-form-group-validator/tsconfig.spec.json"
+              "projects/ngx-group-validator/tsconfig.lib.json",
+              "projects/ngx-group-validator/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -38,32 +38,32 @@
         }
       }
     },
-    "ngx-form-group-validator-demo": {
+    "ngx-group-validator-demo": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "projects/ngx-form-group-validator-demo",
-      "sourceRoot": "projects/ngx-form-group-validator-demo/src",
+      "root": "projects/ngx-group-validator-demo",
+      "sourceRoot": "projects/ngx-group-validator-demo/src",
       "prefix": "fgv-demo",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ngx-form-group-validator-demo",
-            "index": "projects/ngx-form-group-validator-demo/src/index.html",
-            "main": "projects/ngx-form-group-validator-demo/src/main.ts",
-            "polyfills": "projects/ngx-form-group-validator-demo/src/polyfills.ts",
-            "tsConfig": "projects/ngx-form-group-validator-demo/tsconfig.app.json",
+            "outputPath": "dist/ngx-group-validator-demo",
+            "index": "projects/ngx-group-validator-demo/src/index.html",
+            "main": "projects/ngx-group-validator-demo/src/main.ts",
+            "polyfills": "projects/ngx-group-validator-demo/src/polyfills.ts",
+            "tsConfig": "projects/ngx-group-validator-demo/tsconfig.app.json",
             "aot": false,
             "assets": [
-              "projects/ngx-form-group-validator-demo/src/favicon.ico",
-              "projects/ngx-form-group-validator-demo/src/assets"
+              "projects/ngx-group-validator-demo/src/favicon.ico",
+              "projects/ngx-group-validator-demo/src/assets"
             ],
             "styles": [
-              "projects/ngx-form-group-validator-demo/src/styles.scss"
+              "projects/ngx-group-validator-demo/src/styles.scss"
             ],
             "scripts": [
             ]
@@ -72,8 +72,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/ngx-form-group-validator-demo/src/environments/environment.ts",
-                  "with": "projects/ngx-form-group-validator-demo/src/environments/environment.prod.ts"
+                  "replace": "projects/ngx-group-validator-demo/src/environments/environment.ts",
+                  "with": "projects/ngx-group-validator-demo/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -103,33 +103,33 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ngx-form-group-validator-demo:build"
+            "browserTarget": "ngx-group-validator-demo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ngx-form-group-validator-demo:build:production"
+              "browserTarget": "ngx-group-validator-demo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngx-form-group-validator-demo:build"
+            "browserTarget": "ngx-group-validator-demo:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ngx-form-group-validator-demo/src/test.ts",
-            "polyfills": "projects/ngx-form-group-validator-demo/src/polyfills.ts",
-            "tsConfig": "projects/ngx-form-group-validator-demo/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-form-group-validator-demo/karma.conf.js",
+            "main": "projects/ngx-group-validator-demo/src/test.ts",
+            "polyfills": "projects/ngx-group-validator-demo/src/polyfills.ts",
+            "tsConfig": "projects/ngx-group-validator-demo/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-group-validator-demo/karma.conf.js",
             "assets": [
-              "projects/ngx-form-group-validator-demo/src/favicon.ico",
-              "projects/ngx-form-group-validator-demo/src/assets"
+              "projects/ngx-group-validator-demo/src/favicon.ico",
+              "projects/ngx-group-validator-demo/src/assets"
             ],
             "styles": [
-              "projects/ngx-form-group-validator-demo/src/styles.scss"
+              "projects/ngx-group-validator-demo/src/styles.scss"
             ],
             "scripts": []
           }
@@ -138,9 +138,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/ngx-form-group-validator-demo/tsconfig.app.json",
-              "projects/ngx-form-group-validator-demo/tsconfig.spec.json",
-              "projects/ngx-form-group-validator-demo/e2e/tsconfig.json"
+              "projects/ngx-group-validator-demo/tsconfig.app.json",
+              "projects/ngx-group-validator-demo/tsconfig.spec.json",
+              "projects/ngx-group-validator-demo/e2e/tsconfig.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -150,16 +150,16 @@
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "projects/ngx-form-group-validator-demo/e2e/protractor.conf.js",
+            "protractorConfig": "projects/ngx-group-validator-demo/e2e/protractor.conf.js",
             "devServerTarget": "ngx-form-group-validator-demo:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ngx-form-group-validator-demo:serve:production"
+              "devServerTarget": "ngx-group-validator-demo:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "ngx-form-group-validator"
+  "defaultProject": "ngx-group-validator"
 }

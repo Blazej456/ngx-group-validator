@@ -20,10 +20,10 @@
     ],
     "paths": {
       "ngx-form-group-validator": [
-        "dist/ngx-form-group-validator"
+        "dist/ngx-group-validator"
       ],
       "ngx-form-group-validator/*": [
-        "dist/ngx-form-group-validator/*"
+        "dist/ngx-group-validator/*"
       ]
     }
   },

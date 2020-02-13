@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/ngx-form-group-validator",
+  "dest": "../../dist/ngx-group-validator",
   "lib": {
     "entryFile": "src/public-api.ts"
   }
