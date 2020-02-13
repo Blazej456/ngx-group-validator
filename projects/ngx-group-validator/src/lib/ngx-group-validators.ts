@@ -1,6 +1,6 @@
 import { AbstractControl, AsyncValidatorFn, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { AsyncValidationRules, SingleControlCondition, ValidationRules } from './ngx-group-validators.model';
-import { forkJoin, Observable } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export class NgxGroupValidators {
@@ -46,34 +46,32 @@ export class NgxGroupValidators {
         .entries(config)
         .map(([path, conditions]) => {
           if (!controlIsValidable(formGroup.get(path))) {
-            return null;
+            return of(null);
           }
 
           const allErrors = Object.values(conditions).map((data: SingleControlCondition<AsyncValidatorFn>) => {
             if (data.condition.paths.length === 0) {
-              return null;
+              return of(null);
             }
 
             if (!pathsIsCorrect(data.condition.paths, formGroup)) {
-              return null;
+              return of(null);
             }
 
             let err = null;
             if (data.condition.check(...data.condition.paths.map(c => formGroup.get(c)))) {
               if (!data.validators) {
-                return null;
+                return of(null);
               }
 
               const validators = Array.isArray(data.validators) ? data.validators : [data.validators];
               err = Validators.composeAsync(validators)(formGroup.get(path));
 
             }
-            return err ? {[path]: err} : null;
+            return of({[path]: err});
           });
           return forkJoin(allErrors).pipe(map(_mergeErrors));
-        })
-        .filter(a => a != null);
-
+        });
       return forkJoin(errors).pipe(map(_mergeErrors));
     };
   }
