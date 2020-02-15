@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { NgxGroupValidators } from 'ngx-form-group-validator';
 import { switchMap } from 'rxjs/operators';
 import { of, timer } from 'rxjs';
+import { NgxGroupValidators } from 'ngx-form-group-validator';
 
 @Component({
   selector: 'fgv-demo-async',
@@ -52,6 +52,6 @@ export class AsyncComponent {
   }
 
   hasError(error: string) {
-    return this.form.errors && 'comment' in this.form.errors && error in this.form.errors.comment;
+    return this.form.errors != null && this.form.errors.comment != null && error in this.form.errors.comment;
   }
 }
