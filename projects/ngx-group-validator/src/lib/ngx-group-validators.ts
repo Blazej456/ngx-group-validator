@@ -9,7 +9,7 @@ export class NgxGroupValidators {
       const errors = Object
         .entries(config)
         .map(([path, conditions]) => {
-          if (!controlIsValidable(formGroup.get(path))) {
+          if (!_controlIsValidatable(formGroup.get(path))) {
             return null;
           }
 
@@ -18,7 +18,7 @@ export class NgxGroupValidators {
               return null;
             }
 
-            if (!pathsIsCorrect(data.condition.paths, formGroup)) {
+            if (!_pathsIsCorrect(data.condition.paths, formGroup)) {
               return null;
             }
 
@@ -45,43 +45,51 @@ export class NgxGroupValidators {
       const errors = Object
         .entries(config)
         .map(([path, conditions]) => {
-          if (!controlIsValidable(formGroup.get(path))) {
+          if (!_controlIsValidatable(formGroup.get(path))) {
             return of(null);
           }
 
-          const allErrors = Object.values(conditions).map((data: SingleControlCondition<AsyncValidatorFn>) => {
+          const asyncErrors = Object.values(conditions).map((data: SingleControlCondition<AsyncValidatorFn>) => {
             if (data.condition.paths.length === 0) {
               return of(null);
             }
 
-            if (!pathsIsCorrect(data.condition.paths, formGroup)) {
+            if (!_pathsIsCorrect(data.condition.paths, formGroup)) {
               return of(null);
             }
 
-            let err = null;
             if (data.condition.check(...data.condition.paths.map(c => formGroup.get(c)))) {
               if (!data.validators) {
                 return of(null);
               }
 
               const validators = Array.isArray(data.validators) ? data.validators : [data.validators];
-              err = Validators.composeAsync(validators)(formGroup.get(path));
-
+              return Validators.composeAsync(validators)(formGroup.get(path));
             }
-            return of({[path]: err});
+            return of(null);
           });
-          return forkJoin(allErrors).pipe(map(_mergeErrors));
+          return forkJoin(asyncErrors)
+            .pipe(
+              map(_mergeErrors),
+              map(_assignName(path))
+            );
         });
       return forkJoin(errors).pipe(map(_mergeErrors));
     };
   }
 }
 
-function pathsIsCorrect(paths: string[], formGroup: FormGroup): boolean {
+function _assignName(name: string) {
+  return (errors: ValidationErrors) => {
+    return errors ? {[name]: errors} : null;
+  };
+}
+
+function _pathsIsCorrect(paths: string[], formGroup: FormGroup): boolean {
   return paths.every(path => formGroup.get(path) != null);
 }
 
-function controlIsValidable(control: AbstractControl): boolean {
+function _controlIsValidatable(control: AbstractControl): boolean {
   return control != null && !control.disabled;
 }
 
