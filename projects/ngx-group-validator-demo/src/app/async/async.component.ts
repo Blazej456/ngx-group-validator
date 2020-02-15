@@ -35,13 +35,13 @@ export class AsyncComponent {
               check: (a, b) => a.value === true && b.value === true
             },
             validators: control => {
-              return timer(2000)
+              return timer(500)
                 .pipe(
                   switchMap(() => {
                     if (control.value) {
                       return of(null);
                     }
-                    return of({asyncRequired: true});
+                    return of({asyncRequired: 'eg. API Validation'});
                   })
                 );
             }

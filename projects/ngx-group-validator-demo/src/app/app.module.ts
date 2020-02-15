@@ -10,6 +10,7 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
+  MatProgressBarModule,
   MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
@@ -56,7 +57,8 @@ export function getHighlightLanguages() {
     MatTabsModule,
     NgScrollbarModule,
     MatDividerModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatProgressBarModule
   ],
   providers: [
     {
