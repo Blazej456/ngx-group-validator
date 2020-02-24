@@ -19,7 +19,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HIGHLIGHT_OPTIONS, HighlightModule, HighlightOptions } from 'ngx-highlightjs';
 import { HighlightPlusModule } from 'ngx-highlightjs/plus';
-import { NgScrollbarModule } from 'ngx-scrollbar';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SyncComponent } from './sync/sync.component';
 import { AsyncComponent } from './async/async.component';
@@ -55,7 +54,6 @@ export function getHighlightLanguages() {
     MatFormFieldModule,
     MatInputModule,
     MatTabsModule,
-    NgScrollbarModule,
     MatDividerModule,
     FontAwesomeModule,
     MatProgressBarModule

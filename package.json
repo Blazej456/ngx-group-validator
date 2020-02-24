@@ -8,6 +8,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve ngx-group-validator-demo --port 8080",
+    "build:demo": "ng build ngx-group-validator-demo --prod --base-href https://blazej456.github.io/ngx-group-validator/",
     "build": "ng build ngx-group-validator",
     "develop": "yarn build --watch",
     "test": "ng test ngx-group-validator --watch=false --browsers=ChromeHeadlessCustom",
