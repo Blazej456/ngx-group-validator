@@ -16,14 +16,14 @@ jobs:
         run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
       - name: Commit to repository
         env:
-          ACTOR_MAIL: blazej456@gmail.com
-          DEMO_DIST: ngx-group-validator-demo
+          mail: blazej456@gmail.com
+          dist_dir: ngx-group-validator-demo
         run: |
           echo $GITHUB_ACTOR
           git config --global user.name $GITHUB_ACTOR
-          git config --global user.email $ACTOR_MAIL
+          git config --global user.email $mail
 
-          git subtree add --prefix dist/$DEMO_DIST origin gh-pages
-          git add dist/$DEMO_DIST -f
-          git commit -m "${{ steps.get_version.outputs.VERSION }} demo release"
-          git subtree push --prefix dist/$DEMO_DIST origin gh-pages
+          git subtree add --prefix dist/$dist_dir origin gh-pages
+          git add dist/$dist_dir -f
+          git commit -m "demo release"
+          git subtree push --prefix dist/$dist_dir origin gh-pages
