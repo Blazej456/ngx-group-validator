@@ -14,12 +14,20 @@ jobs:
       - name: Get the version
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
-      - name: Commit to repository
+      - name: Set subtree
         run: |
           git config --global user.name Blazej456
           git config --global user.email blazej456@gmail.com
 
           git subtree add --prefix dist/ngx-group-validator-demo origin gh-pages
+      - name: Build demo
+        uses: actions/setup-node@v1
+          with:
+            node-version: 12
+        run: npm build:demo
+      - name: Deploy to repo
+        uses: actions/checkout@v1
+        run: |
           git add dist/ngx-group-validator-demo -f
           git commit -m "demo release"
           git subtree push --prefix dist/ngx-group-validator-demo origin gh-pages
