@@ -1,0 +1,23 @@
+name: Demo pages
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Deploy demo app to gh-pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+      - name: Commit to repository
+        run: |
+          git config --global user.name ${GITHUB_ACTOR}
+          git config --global user.email ${GITHUB_ACTOR_MAIL}
+
+          git subtree add --prefix dist/${GITHUB_DEMO_DIST} origin gh-pages
+          git add dist/${GITHUB_DEMO_DIST} -f
+          git commit -m "${{ steps.get_version.outputs.VERSION }} demo release"
+          git subtree push --prefix dist/${GITHUB_DEMO_DIST} origin gh-pages
