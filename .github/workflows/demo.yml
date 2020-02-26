@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
-        run: npm run build:demo
+      - run: npm run build:demo
       - name: Deploy to repo
         uses: actions/checkout@v1
         run: |
