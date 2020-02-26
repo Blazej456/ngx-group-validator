@@ -22,8 +22,8 @@ jobs:
           git subtree add --prefix dist/ngx-group-validator-demo origin gh-pages
       - name: Build demo
         uses: actions/setup-node@v1
-          with:
-            node-version: 12
+        with:
+          node-version: 12
         run: npm run build:demo
       - name: Deploy to repo
         uses: actions/checkout@v1
