@@ -1,6 +1,15 @@
 {
   "name": "ngx-group-validator",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "author": "Blazej456",
+  "description": "Angular FormGroup conditional validators",
+  "homepage": "https://blazej456.github.io/ngx-group-validator/",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Blazej456/ngx-group-validator",
+    "directory": "projects/ngx-group-validator"
+  },
   "peerDependencies": {
     "@angular/common": "^8.2.14",
     "@angular/core": "^8.2.14"

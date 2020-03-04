@@ -4,7 +4,7 @@ import { ErrorStateMatcher } from '@angular/material';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { switchMap } from 'rxjs/operators';
 import { of, timer } from 'rxjs';
-import { NgxGroupValidators } from 'ngx-form-group-validator';
+import { NgxGroupValidators } from 'ngx-group-validator';
 
 @Component({
   selector: 'fgv-demo-async',

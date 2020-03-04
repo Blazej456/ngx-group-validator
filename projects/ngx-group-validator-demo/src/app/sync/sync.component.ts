@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { NgxGroupValidators } from 'ngx-form-group-validator';
+import { NgxGroupValidators } from 'ngx-group-validator';
 
 @Component({
   selector: 'fgv-demo-sync',

@@ -1,24 +1,42 @@
-# NgxFormGroupValidator
+# NgxGroupValidator
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.14.
+Angular 8+ conditional validation rules for `FormGroup`
 
-## Code scaffolding
+Demo available [here](https://blazej456.github.io/ngx-group-validator/) 
 
-Run `ng generate component component-name --project ngx-form-group-validator` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-form-group-validator`.
-> Note: Don't forget to add `--project ngx-form-group-validator` or else it will be added to the default project in your `angular.json` file. 
+#### Example
+````typescript
+this.form = this.fb.group({
+      checkbox: [false],
+      comment: ['']
+    }, {
+      validators: NgxGroupValidators.sync({
+        comment: [
+          {
+            condition: {
+              paths: ['checkbox'],
+              check: (a) => a.value === true
+            },
+            validators: Validators.required
+          }
+        ]
+      })
+    });
+````
+##### How it works
+Validate `comment` control than, and only then, when described in `condition` part `check`
+function will return `true`. And `comment` control will be validated with `validators` part
+of configuration.  
 
-## Build
+Realize that the every control in configuration can have many conditions.
+And each condition has own `check` function, and each condition validate control with it's
+own validation rules.
 
-Run `ng build ngx-form-group-validator` to build the project. The build artifacts will be stored in the `dist/` directory.
+#### Instalation
+````shell script
+npm install ngx-group-validator
+````
+````shell script
+yarn add ngx-group-validator
+````
 
-## Publishing
-
-After building your library with `ng build ngx-form-group-validator`, go to the dist folder `cd dist/ngx-form-group-validator` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test ngx-form-group-validator` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
