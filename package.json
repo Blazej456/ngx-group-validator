@@ -12,7 +12,8 @@
     "test": "ng test ngx-group-validator --watch=false --browsers=ChromeHeadlessCustom",
     "test:watch": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "version": "cd dist/ngx-group-validator/ | npm version $s"
   },
   "private": true,
   "dependencies": {
