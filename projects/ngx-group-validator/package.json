@@ -5,6 +5,12 @@
   "description": "Angular FormGroup conditional validators",
   "homepage": "https://blazej456.github.io/ngx-group-validator/",
   "license": "MIT",
+  "keywords": [
+    "Angular",
+    "FormGroup",
+    "validation",
+    "conditional"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/Blazej456/ngx-group-validator",
@@ -12,6 +18,8 @@
   },
   "peerDependencies": {
     "@angular/common": "^8.2.14",
-    "@angular/core": "^8.2.14"
+    "@angular/core": "^8.2.14",
+    "@angular/forms": "^8.2.14",
+    "rxjs": "^6.4.0"
   }
 }
