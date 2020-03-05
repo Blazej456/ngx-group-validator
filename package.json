@@ -13,7 +13,7 @@
     "test:watch": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "version": "cd dist/ngx-group-validator/ | npm version $s"
+    "version": "bump_version.sh"
   },
   "private": true,
   "dependencies": {
