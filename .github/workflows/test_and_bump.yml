@@ -33,7 +33,7 @@ jobs:
         run: npm version $env.new_tag
       - name: Push tag
         env:
-          USERL ${{ secrets.USER }}
+          USER: ${{ secrets.USER }}
           EMAIL: ${{ secrets.EMAIL }}
         run: |
           git config --global user.name $GITHUB_ACTOR
