@@ -37,7 +37,9 @@ jobs:
           DRY_RUN: true
           DEFAULT_BUMP: patch
       - name: Bump version
-        run: npm version $env.new_tag
+        env:
+          NEW_TAG: ${{ env.new_tag }}
+        run: npm version $NEW_TAG
       - name: Push tag
         env:
           USER: ${{ secrets.USER }}
