@@ -22,6 +22,7 @@ jobs:
         run: npm test
   bump:
     name: Bump version
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Copying repository
