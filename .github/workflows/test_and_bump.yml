@@ -7,13 +7,11 @@ on:
 
 jobs:
   test:
-    name: Unit tests
+    name: Tests
     runs_on: ubuntu-latest
     steps:
       - name: Copying repository
-        uses: actions/checkout@master
-        with:
-          fetch-depth: '0'
+        uses: actions/checkout@v1
       - name: Setup node
         uses: actions/setup-node@v1
         with:
@@ -22,6 +20,14 @@ jobs:
         run: npm ci
       - name: Run tests
         run: npm test
+  bump:
+    name: Bump version
+    runs_on: ubuntu-latest
+    steps:
+      - name: Copying repository
+        uses: actions/checkout@master
+        with:
+          fetch-depth: '0'
       - name: Produce new tag
         uses: anothrNick/github-tag-action@1.17.2
         env:
