@@ -1,0 +1,42 @@
+name: Test and Bump version
+
+on:
+  push:
+    branch:
+      - master
+
+jobs:
+  test:
+    name: Unit tests
+    runs_on: ubuntu-latest
+    steps:
+      - name: Copying repository
+        uses: actions/checkout@master
+        with:
+          fetch-depth: '0'
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Install deps
+        run: npm ci
+      - name: Run tests
+        run: npm test
+      - name: Produce new tag
+        uses: anothrNick/github-tag-action@1.17.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          DRY_RUN: true
+          DEFAULT_BUMP: patch
+      - name: Bump version
+        run: npm version $env.new_tag
+      - name: Push tag
+        env:
+          USERL ${{ secrets.USER }}
+          EMAIL: ${{ secrets.EMAIL }}
+        run: |
+          git config --global user.name $GITHUB_ACTOR
+          git config --global user.email $EMAIL
+
+          git push --tags origin master
