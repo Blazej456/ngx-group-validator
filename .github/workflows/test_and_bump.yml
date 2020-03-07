@@ -17,9 +17,9 @@ jobs:
         with:
           node-version: 12
       - name: Install deps
-        run: npm ci
+        run: yarn install
       - name: Run tests
-        run: npm test
+        run: yarn test
   bump:
     name: Bump version
     needs: test
