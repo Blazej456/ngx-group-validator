@@ -8,7 +8,7 @@ on:
 jobs:
   test:
     name: Tests
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Copying repository
         uses: actions/checkout@v1
@@ -22,7 +22,7 @@ jobs:
         run: npm test
   bump:
     name: Bump version
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Copying repository
         uses: actions/checkout@master
