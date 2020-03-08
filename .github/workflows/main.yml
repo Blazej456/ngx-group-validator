@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Copying repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Setup node
         uses: actions/setup-node@v1
         with:
@@ -20,13 +20,14 @@ jobs:
         run: yarn install
       - name: Run tests
         run: yarn test
+
   bump:
     name: Bump version
     needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Copying repository
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
         with:
           fetch-depth: '0'
       - name: Produce new tag
@@ -48,4 +49,27 @@ jobs:
           git config --global user.name $GITHUB_ACTOR
           git config --global user.email $EMAIL
 
-          git push --tags origin master
+          git push --follow-tags origin master
+
+  build:
+    name: Build library
+    needs: bump
+    runs-on: ubuntu-latest
+    steps:
+      - name: Copying repository
+        uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - name: Install deps
+        run: yarn install
+      - name: Build
+        run: yarn build
+      - name: Publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+        run: |
+          cd dist/ngx-group-validator
+          npm publish --dry-run
