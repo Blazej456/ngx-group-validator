@@ -15,4 +15,5 @@ cd projects/ngx-group-validator || return
 
 npm version $VERSION --git-tag-version false
 
+git status
 git add .
