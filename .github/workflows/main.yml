@@ -50,7 +50,7 @@ jobs:
           git config --global user.name $GITHUB_ACTOR
           git config --global user.email $EMAIL
 
-          git push --follow-tags https://${TOKEN}@github.com/${GITHUB_REPOSITORY}.git origin master
+          git push --follow-tags https://${TOKEN}:x-oauth-basic@github.com/${GITHUB_REPOSITORY}.git origin master
 
   build:
     name: Build library
