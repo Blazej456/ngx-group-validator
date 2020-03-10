@@ -41,16 +41,20 @@ jobs:
         env:
           NEW_TAG: ${{ env.new_tag }}
         run: npm version $NEW_TAG
-      - name: Push tag
-        env:
-          USER: ${{ secrets.USER }}
-          EMAIL: ${{ secrets.EMAIL }}
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config --global user.name $GITHUB_ACTOR
-          git config --global user.email $EMAIL
-
-          git push --follow-tags https://${TOKEN}:x-oauth-basic@github.com/${GITHUB_REPOSITORY}.git origin master
+      #      - name: Push tag
+      #        env:
+      #          USER: ${{ secrets.USER }}
+      #          EMAIL: ${{ secrets.EMAIL }}
+      #          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #        run: |
+      #          git config --global user.name $GITHUB_ACTOR
+      #          git config --global user.email $EMAIL
+      #
+      #          git push --follow-tags https://${TOKEN}:x-oauth-basic@github.com/${GITHUB_REPOSITORY}.git origin master
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   build:
     name: Build library
